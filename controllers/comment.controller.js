@@ -104,7 +104,7 @@ const commentController = {
         commentData.previoushash,
         commentData.timestamp,
         commentData.data,
-        commentData.ipAddress,
+        ipAddress,
         commentData.hash,
         0
       ]
