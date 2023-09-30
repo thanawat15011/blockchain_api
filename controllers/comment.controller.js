@@ -78,7 +78,7 @@ const commentController = {
   deleteById: async (req, res) => {
     try {
       const commentId = req.params.id
-      const ipAddress = req.params.ipAddress
+      const ipAddress = req.body.ipAddress; 
 
       // ดึงข้อมูลความคิดเห็นที่จะลบ
       const selectSql = "SELECT * FROM comment WHERE id = $1"
