@@ -100,10 +100,10 @@ const commentController = {
 
       const insertHistoryValues = [
         commentData.comment_index,
-        commentData.previousHash,
+        commentData.previoushash,
         commentData.timestamp,
         commentData.data,
-        commentData.ipAddress,
+        commentData.ipaddress,
         commentData.hash,
       ]
 
