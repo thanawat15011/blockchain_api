@@ -1,13 +1,17 @@
-const express = require("express")
-const app = express()
+const express = require("express");
+const cors = require("cors"); // เพิ่มการนำเข้า cors
 
-require('dotenv').config()
+const app = express();
 
-app.use(express.json())
+require("dotenv").config();
 
+app.use(express.json());
 
-const commentRouter = require('./routes/comment.router')
+// เปิดการใช้งาน middleware cors
+app.use(cors());
 
-app.use("/api", commentRouter)
+const commentRouter = require("./routes/comment.router");
 
-app.listen(process.env.PORT, () => console.log("Server is running on port 5000"))
+app.use("/api", commentRouter);
+
+app.listen(process.env.PORT, () => console.log("Server is running on port 5000"));
