@@ -3,8 +3,8 @@ const commentController = {
   getCommentAll: async (req, res) => {
     try {
       const { rows } = await postgre.query("SELECT * FROM comment")
-      // res.json({ msg: "OK", data: rows })
-      res.json({ rows })
+      res.json({ msg: "OK", data: rows })
+      // res.json({ rows })
     } catch (error) {
       res.json({ msg: error.msg })
     }
@@ -12,8 +12,8 @@ const commentController = {
   getHistoryAll: async (req, res) => {
     try {
       const { rows } = await postgre.query("SELECT * FROM comment_history")
-      res.json({ rows })
-      // res.json({ msg: "OK", data: rows })
+      // res.json({ rows })
+      res.json({ msg: "OK", data: rows })
     } catch (error) {
       res.json({ msg: error.msg })
     }
@@ -25,10 +25,21 @@ const commentController = {
       // สร้าง comment ในตาราง comment
       const commentSql = `
             INSERT INTO comment (comment_index, previousHash, timestamp, data, ipAddress, hash, isDeleted)
-            VALUES (${index}, ${previousHash}, ${timestamp}, ${data}, ${ipAddress}, ${hash}, "active")
+            VALUES ($1, $2, $3, $4, $5, $6, $7)
             RETURNING *
           `
-      const commentResult = await postgre.query(commentSql)
+
+      const commentValues = [
+        index,
+        previousHash,
+        timestamp,
+        JSON.stringify(data),
+        ipAddress,
+        hash,
+        "active",
+      ]
+
+      const commentResult = await postgre.query(commentSql, commentValues)
 
       // สร้าง comment-history ในตาราง comment-history
       const historySql = `
