@@ -96,7 +96,7 @@ const commentController = {
       // เพิ่มข้อมูลความคิดเห็นที่จะลบลงใน comment_history
       const insertHistorySql = `
             INSERT INTO comment_history (comment_index, previoushash, timestamp, data, ipaddress, hash, status)
-            VALUES ($1, $2, $3, $4, $5, $6)
+            VALUES ($1, $2, $3, $4, $5, $6, $7)
           `
 
       const insertHistoryValues = [
