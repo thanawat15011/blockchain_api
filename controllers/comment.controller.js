@@ -24,7 +24,7 @@ const commentController = {
 
       // สร้าง comment ในตาราง comment
       const commentSql = `
-            INSERT INTO comment (comment_index, previousHash, timestamp, data, ipAddress, hash, isDeleted)
+            INSERT INTO comment (comment_index, previoushash, timestamp, data, ipaddress, hash, isdeleted)
             VALUES ($1, $2, $3, $4, $5, $6, $7)
             RETURNING *
           `
@@ -43,7 +43,7 @@ const commentController = {
 
       // สร้าง comment-history ในตาราง comment-history
       const historySql = `
-            INSERT INTO comment_history (comment_index, previousHash, timestamp, data, ipAddress, hash, status)
+            INSERT INTO comment_history (comment_index, previoushash, timestamp, data, ipaddress, hash, status)
             VALUES ($1, $2, $3, $4, $5, $6, $7)
             RETURNING *
           `
@@ -94,7 +94,7 @@ const commentController = {
 
       // เพิ่มข้อมูลความคิดเห็นที่จะลบลงใน comment_history
       const insertHistorySql = `
-            INSERT INTO comment_history (comment_index, previousHash, timestamp, data, ipAddress, hash)
+            INSERT INTO comment_history (comment_index, previoushash, timestamp, data, ipaddress, hash)
             VALUES ($1, $2, $3, $4, $5, $6)
           `
 
