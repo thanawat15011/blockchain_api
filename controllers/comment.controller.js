@@ -78,6 +78,7 @@ const commentController = {
   deleteById: async (req, res) => {
     try {
       const commentId = req.params.id
+      const ipAddress = req.params.ipAddress
 
       // ดึงข้อมูลความคิดเห็นที่จะลบ
       const selectSql = "SELECT * FROM comment WHERE id = $1"
@@ -94,7 +95,7 @@ const commentController = {
 
       // เพิ่มข้อมูลความคิดเห็นที่จะลบลงใน comment_history
       const insertHistorySql = `
-            INSERT INTO comment_history (comment_index, previoushash, timestamp, data, ipaddress, hash)
+            INSERT INTO comment_history (comment_index, previoushash, timestamp, data, ipaddress, hash, status)
             VALUES ($1, $2, $3, $4, $5, $6)
           `
 
@@ -103,8 +104,9 @@ const commentController = {
         commentData.previoushash,
         commentData.timestamp,
         commentData.data,
-        commentData.ipaddress,
+        commentData.ipAddress,
         commentData.hash,
+        0
       ]
 
       await postgre.query(insertHistorySql, insertHistoryValues)
